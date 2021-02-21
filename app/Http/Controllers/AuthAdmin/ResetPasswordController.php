@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Crypt;
 
 class ResetPasswordController extends Controller
 {
@@ -43,9 +44,10 @@ class ResetPasswordController extends Controller
     public function showResetForm(Request $request) {
 
         $token = $request->route()->parameter('token');
+        $email = $request->route()->parameter('email');
         
         return view('authAdmin.password.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+            ['token' => $token, 'email' => Crypt::decrypt($email)]
         );
     }
 }

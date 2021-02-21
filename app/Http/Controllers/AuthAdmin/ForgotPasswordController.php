@@ -31,7 +31,7 @@ class ForgotPasswordController extends Controller
         return Auth::guard('admin');
     }
 
-    //Email Form 
+    //Show email form 
     public function showPasswordResetForm() {
         return view('authAdmin.password.email');
     }

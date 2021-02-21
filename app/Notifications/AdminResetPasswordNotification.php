@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminResetPasswordNotification extends Notification
 {
@@ -44,7 +45,7 @@ class AdminResetPasswordNotification extends Notification
     {
         return (new MailMessage)
                     ->line('You are recieving this email because we recieved password reset request for your account. ')
-                    ->action('Reset Password', url('/admin/password/reset/' . $this->token))
+                    ->action('Reset Password', url('/admin/password/reset/' . $this->token . '/' . Crypt::encrypt($notifiable->email) ))
                     ->line('Thank you for using our application!');
     }
 

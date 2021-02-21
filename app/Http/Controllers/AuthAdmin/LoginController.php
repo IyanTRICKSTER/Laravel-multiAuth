@@ -55,8 +55,9 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt($credential, $remember=true)) {
             return redirect()->intended(route('admin.dashboard'));
         }
-
-        return redirect()->back()->withInput($request->only('email', 'remember'))->with('email', 'invalid credential');
+        
+        return redirect()->back()->withErrors(array('email' => 'Invalid credentials', 'password' => 'Invalid credentials'));
+        
     }
 
     // Admin Logout Method

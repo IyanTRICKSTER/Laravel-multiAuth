@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/logout', [App\Http\Controllers\AuthAdmin\LoginController::class, 'logoutAdmin'])->name('admin.logout');
     Route::post('/password/email', [App\Http\Controllers\AuthAdmin\ForgotPasswordController::class, 'sendResetLinkAccount'])->name('admin.password.email');
     Route::get('/password/reset', [App\Http\Controllers\AuthAdmin\ForgotPasswordController::class, 'showPasswordResetForm'])->name('admin.password.request');
-    Route::get('/password/reset/{token}', [App\Http\Controllers\AuthAdmin\ResetPasswordController::class, 'showResetForm'])->name('admin.password.reset');
+    Route::get('/password/reset/{token}/{email}', [App\Http\Controllers\AuthAdmin\ResetPasswordController::class, 'showResetForm'])->name('admin.password.reset');
     Route::post('/password/reset', [App\Http\Controllers\AuthAdmin\ResetPasswordController::class, 'reset'])->name('admin.password.update');
 });
 
